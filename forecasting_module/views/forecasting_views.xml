@@ -6,18 +6,18 @@
         <field name="arch" type="xml">
             <form string="Forecasting Data">
                 <header>
-                    <button name="generate_forecast" string="Generate Forecast" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'processed')]}"/>
-                    <button name="download_csv" string="Download CSV" type="object" class="oe_highlight" attrs="{'invisible': [('file', '=', False)]}"/>
+                    <button name="generate_forecast" string="Generate Forecast" type="object" class="oe_highlight" invisible="1" attrs="{'invisible': [('state', '!=', 'processed')]}"/>
+                    <button name="download_csv" string="Download CSV" type="object" class="oe_highlight" invisible="1" attrs="{'invisible': [('file', '=', False)]}"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
-                    <field name="name" widget="image" class="oe_avatar" attrs="{'invisible': [('name', '=', False)]}"/>
+                    <field name="name" widget="image" class="oe_avatar" invisible="name == False"/>
                     <group>
                         <field name="name"/>
                         <field name="file" filename="file_name"/>
                         <field name="file_name" invisible="1"/>
                     </group>
-                    <group string="Forecast Settings" attrs="{'invisible': [('state', '=', 'draft')]}">
+                    <group string="Forecast Settings" invisible="state == 'draft'">
                         <field name="date_column"/>
                         <field name="target_column"/>
                         <field name="period"/>
@@ -37,7 +37,6 @@
                 </div>
             </form>
         </field>
-    </record>
 
     <record id="forecasting_data_list_view" model="ir.ui.view">
         <field name="name">forecasting.data.list</field>
