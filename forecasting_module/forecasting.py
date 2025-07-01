@@ -8,6 +8,7 @@ from odoo.exceptions import ValidationError
 class ForecastingData(models.Model):
     _name = 'forecasting.data'
     _description = 'Forecasting Data'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string="Name", required=True)
     file = fields.Binary(string="Upload CSV")
