@@ -5,12 +5,17 @@
         <field name="model">forecasting.data</field>
         <field name="arch" type="xml">
             <form string="Forecasting Data">
+                <header>
+                    <button name="generate_forecast" string="Generate Forecast" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'processed')]}"/>
+                    <button name="download_csv" string="Download CSV" type="object" class="oe_highlight" attrs="{'invisible': [('file', '=', False)]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
                 <sheet>
+                    <field name="name" widget="image" class="oe_avatar" attrs="{'invisible': [('name', '=', False)]}"/>
                     <group>
                         <field name="name"/>
                         <field name="file" filename="file_name"/>
                         <field name="file_name" invisible="1"/>
-                        <field name="state"/>
                     </group>
                     <group string="Forecast Settings" attrs="{'invisible': [('state', '=', 'draft')]}">
                         <field name="date_column"/>
@@ -31,25 +36,27 @@
                     <field name="message_ids"/>
                 </div>
             </form>
-        </record>
+        </field>
+    </record>
 
-        <record id="forecasting_data_list_view" model="ir.ui.view">
-            <field name="name">forecasting.data.list</field>
-            <field name="model">forecasting.data</field>
-            <field name="arch" type="xml">
-                <list>
-                    <field name="name"/>
-                    <field name="file_name"/>
-                    <field name="state"/>
-                </list>
-            </record>
+    <record id="forecasting_data_list_view" model="ir.ui.view">
+        <field name="name">forecasting.data.list</field>
+        <field name="model">forecasting.data</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="file_name"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
 
-        <record id="forecasting_data_action" model="ir.actions.act_window">
-            <field name="name">Forecasting Data</field>
-            <field name="res_model">forecasting.data</field>
-            <field name="view_mode">list,form</field>
-        </record>
+    <record id="forecasting_data_action" model="ir.actions.act_window">
+        <field name="name">Forecasting Data</field>
+        <field name="res_model">forecasting.data</field>
+        <field name="view_mode">list,form</field>
+    </record>
 
-        <menuitem id="forecasting_menu_root" name="Forecasting" sequence="10"/>
-        <menuitem id="forecasting_menu_data" name="Data" parent="forecasting_menu_root" action="forecasting_data_action" sequence="10"/>
+    <menuitem id="forecasting_menu_root" name="Forecasting" sequence="10"/>
+    <menuitem id="forecasting_menu_data" name="Data" parent="forecasting_menu_root" action="forecasting_data_action" sequence="10"/>
 </odoo>
