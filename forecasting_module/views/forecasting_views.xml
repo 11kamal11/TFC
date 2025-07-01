@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="forecasting_data_form_view" model="ir.ui.view">
+        <field name="name">forecasting.data.form</field>
+        <field name="model">forecasting.data</field>
+        <field name="arch" type="xml">
+            <form string="Forecasting Data">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="file" filename="file_name"/>
+                        <field name="file_name" invisible="1"/>
+                        <field name="state"/>
+                    </group>
+                    <group string="Forecast Settings" attrs="{'invisible': [('state', '=', 'draft')]}">
+                        <field name="date_column"/>
+                        <field name="target_column"/>
+                        <field name="period"/>
+                        <field name="horizon"/>
+                        <field name="five_year_forecast"/>
+                        <field name="plot_type"/>
+                        <field name="plot_theme"/>
+                        <field name="yearly_seasonality"/>
+                        <field name="include_holidays"/>
+                    </group>
+                    <field name="forecast_result" invisible="1"/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </record>
+
+        <record id="forecasting_data_list_view" model="ir.ui.view">
+            <field name="name">forecasting.data.list</field>
+            <field name="model">forecasting.data</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="file_name"/>
+                    <field name="state"/>
+                </list>
+            </record>
+
+        <record id="forecasting_data_action" model="ir.actions.act_window">
+            <field name="name">Forecasting Data</field>
+            <field name="res_model">forecasting.data</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="forecasting_menu_root" name="Forecasting" sequence="10"/>
+        <menuitem id="forecasting_menu_data" name="Data" parent="forecasting_menu_root" action="forecasting_data_action" sequence="10"/>
+</odoo>

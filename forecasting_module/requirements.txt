@@ -1,0 +1,6 @@
+pandas>=2.0.0
+numpy>=1.23.0
+prophet>=1.1.0
+scikit-learn>=1.0.0
+chardet>=5.0.0
+plotly>=5.0.0
